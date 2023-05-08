@@ -12,7 +12,7 @@ import {
   useForm
 } from "react-hook-form";
 
-// import useLoginModal from "@/app/hooks/useLoginModal";
+import useLoginModal from "../hooks/useLoginModal";
 import useRegisterModal from "../hooks/useRegisterModal";
 
 import Modal from "./modal";
@@ -20,10 +20,11 @@ import Input from "../inputs/Input";
 import Heading from "../Heading";
 import Button from "../Button";
 import { signIn } from "next-auth/react";
+import LoginModal from "./LoginModal";
 
 const RegisterModal= () => {
   const registerModal = useRegisterModal();
-  // const loginModal = useLoginModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const { 
@@ -55,7 +56,10 @@ const RegisterModal= () => {
       setIsLoading(false);
     })
   }
-
+  const onToggle = useCallback(()=>{
+    registerModal.onClose();
+    loginModal.onOpen();
+  },[loginModal,registerModal])
   
 
   const bodyContent = (
@@ -117,7 +121,7 @@ const RegisterModal= () => {
       >
         <p>Already have an account?
           <span 
-          
+          onClick={onToggle}
             className="
               text-neutral-800
               cursor-pointer 
