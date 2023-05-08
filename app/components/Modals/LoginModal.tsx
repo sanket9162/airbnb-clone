@@ -12,7 +12,6 @@ import {
   useForm
 } from "react-hook-form";
 
-// import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "../hooks/useRegisterModal";
 
 import Modal from "./modal";
@@ -59,7 +58,10 @@ const LoginModal= () => {
       }
     })
   }
-
+  const onToggle = useCallback(()=>{
+    loginModal.onClose();
+    registerModal.onOpen();
+  },[loginModal, registerModal])
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
@@ -109,15 +111,15 @@ const LoginModal= () => {
           font-light
         "
       >
-        <p>Already have an account?
+        <p>First time using Airbnb?
           <span 
-          
+            onClick={onToggle}
             className="
               text-neutral-800
               cursor-pointer 
               hover:underline
             "
-            > Log in</span>
+            > Create an account</span>
         </p>
       </div>
     </div>
