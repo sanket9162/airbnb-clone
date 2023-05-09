@@ -18,7 +18,7 @@ import {
   import Container from '../Container';
   import CategoryBox from '../CategoryBox';
 
-const categories = [
+export const categories = [
     {
         label: 'Beaach',
         icon: TbBeach,
